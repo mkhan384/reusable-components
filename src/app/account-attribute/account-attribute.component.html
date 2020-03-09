@@ -1,0 +1,59 @@
+<div class="sc w-100 flex mt3">
+  <jb-icon *ngIf="attributeInfo?.leadingImage?.show" class="white t-fast mr7-5" width="40" height="48"
+  name="{{attributeInfo?.leadingImage?.name}}" style="height:3rem;"></jb-icon>
+  <jb-avatar *ngIf="attributeInfo?.leadingImage?.isAvatar" class="white t-fast mr7-5" initials="AD"
+    [src]="attributeInfo?.leadingImage?.avatarsrc"></jb-avatar>
+  <div class="container  w-100">
+    <div class="nameConta justify-between flex">
+      <jb-copy size="small" class="b charcoal">{{ attributeInfo?.name }}</jb-copy>
+      <div class="rightLinkContainer w-8-5 flex">
+        <div *ngIf="attributeInfo?.trailingLinks?.show" [ngClass]="{'flex-row-reverse': attributeInfo?.trailingLinks?.multipleLinks}" class="links flex">
+          <button *ngIf="attributeInfo?.trailingLinks?.multipleLinks" [ngClass]="{ml3: (attributeInfo?.trailingLinks?.multipleLinks), mh3: !(attributeInfo?.trailingLinks?.multipleLinks)}"
+            class="ph0 royal-blue fr copy-s b pointer no-underline underline-hover" (click)="openDialog($event)"
+            jbActionLink>{{ attributeInfo?.trailingLinks?.link2Text }}</button>
+          <span *ngIf="attributeInfo?.trailingLinks?.multipleLinks" class="db vertcalDiv"></span>
+          <button [ngClass]="{mh3: (attributeInfo?.trailingLinks?.multipleLinks),ml3: !(attributeInfo?.trailingLinks?.multipleLinks)}" class="add-edit-btn ph0 w-auto royal-blue fr copy-s b pointer no-underline underline-hover"
+            (click)="expandAttribute()" jbActionLink>{{ attributeInfo?.trailingLinks?.link1Text }}</button>
+        </div>
+        <div *ngIf="!attributeInfo?.trailingLinks?.show" class="helptextLink">
+          <button *ngIf="!isMobile" class="fr tl mt-btn pointer bn pa0" (click)="anchor.toggle()">
+            <jb-icon name="bookQuestionCircle" width="16" height="16" class="royal-blue" jbAnchor #anchor="jbAnchor"
+            [tooltip]="tooltip"></jb-icon>
+          </button>
+          <jb-tooltip #tooltip>
+            <div>
+              <p class="charcoal mw6-ns mw5 copy-s mb0" [innerHTML]="attributeInfo?.trailingLinks?.popover?.text">
+              </p>
+            </div>
+          </jb-tooltip>
+          <button *ngIf="isMobile" class="fr tl mt-btn pointer bn pa0" (click)="anchor.toggle()">
+            <jb-icon name="bookQuestionCircle" width="16" height="16" jbAnchor #anchor="jbAnchor"
+            [tooltip]="tooltip" class="royal-blue"></jb-icon>
+            <jb-tooltip #tooltip>
+              <div>
+                <p class="charcoal mw6-ns mw5 copy-s mb0" [innerHTML]="mockPageResponse?.category[0]?.attributes[4]?.message">
+                </p>
+              </div>
+            </jb-tooltip>
+          </button>
+          <!--<jb-copy size="small" class="charcoal fr mr2">{{ attributeInfo?.trailingLinks?.popover?.label }}</jb-copy>-->
+        </div>
+      </div>
+    </div>
+    <div class="flex w-100 mt1 relative">
+      <jb-avatar *ngIf="attributeInfo?.description?.showImage" class="avatar-box" [src]="profilePicture"></jb-avatar>
+      <jb-icon *ngIf="attributeInfo?.description?.errorInDescription"
+        class="t-fast notranslate fill-current-color absolute l0 absolute-center ml2" width="14" height="14"
+        name="error"></jb-icon>
+      <div class="descriptionDiv">
+        <ng-container *ngFor="let desc of attributeInfo?.description?.descriptionContent;trackBy: trackByFn">
+          <jb-copy *ngIf="!attributeInfo?.description?.showImage" size="standard"
+            [ngClass]="{'ml22': attributeInfo?.description?.errorInDescription}" class="charcoal description">
+            {{ desc }}
+          </jb-copy>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+<hr *ngIf="!expandedAttribute" class="mt3">

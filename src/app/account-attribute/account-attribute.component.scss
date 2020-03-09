@@ -1,0 +1,48 @@
+@import '../../../../../src/styles/variables.scss';
+
+@media #{$breakpoint-not-small}{
+  .copy {
+  font-size: 1rem;
+  }
+}
+@media #{$breakpoint-medium}{
+  .copy {
+  font-size: 0.9375rem;
+  }
+}
+
+hr {
+    border: 1px solid $light-gray;
+}
+
+.mr7-5{
+  margin-right: 0.75rem;
+}
+
+.ml22{
+  margin-left: 22px;
+}
+.l0{
+  left: 0 !important;
+}
+.vertcalDiv{
+  background-color: $light-gray;
+  width: 3px;
+  height: 12px;
+  margin-top: 6px;
+}
+.mt-btn {
+  margin-top: 0.2rem;
+}
+.avatar-box {
+  height: 3rem;
+  width: 3rem;
+}
+.descriptionDiv {
+  width: inherit;
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

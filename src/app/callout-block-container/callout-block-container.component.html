@@ -1,0 +1,38 @@
+<ng-container *ngIf="!!calloutBlock && calloutBlock?.length">
+  <div class="jb-max-width center">
+  <div
+    class="jb-grid mv6 jb-callout-block"
+    [ngClass]="{
+    'one-up' : calloutBlock?.length === 1,
+    'two-up grid-offset' : calloutBlock?.length === 2,
+    'three-up' : calloutBlock?.length === 3,
+    'four-up' : calloutBlock?.length > 3
+    }">
+    <ng-container *ngFor="let block of calloutBlock; let i = index; trackBy: trackByFn">
+      <jb-callout-block>
+        <jb-image *ngIf="!!block?.image && block?.image[0]?.src"
+          sizedBy="height"
+          src="{{ block?.image[0]?.src }}"
+          [defer]="true">
+        </jb-image>
+        <jb-icon name="{{ block?.icon[0]?.src }}" *ngIf="!!block?.icon && block?.icon[0]?.src">
+        </jb-icon>
+        <ng-container JbTitle> <h3> {{ block?.title }} </h3> </ng-container>
+        <ng-container JbDescription> {{ block?.description }} </ng-container>
+        <a *ngIf="!!block?.link && block?.link?.length"
+           [jbSitemapLinker]="block?.link[0]?.href"
+           [target]="block?.link[0]?.newWindow"
+           jbActionLink>
+          {{ block?.link[0]?.title }}
+          <span class="w1">
+            <jb-icon class="pl1"
+                     [name]="getLinkIcon(block?.link[0]?.newWindow)"
+                     [label]="getLinkLabel(block?.link[0]?.newWindow)">
+            </jb-icon>
+          </span>
+        </a>
+      </jb-callout-block>
+    </ng-container>
+  </div>
+</div>
+</ng-container>
